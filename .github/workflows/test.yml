@@ -22,6 +22,13 @@ jobs:
         uses: gradle/actions/setup-gradle@9e899d11ad247ec76be7a60bc1cf9d3abbb9e7f1
         with:
           cache-disabled: true
+      - name: get unit test reports
+        uses: dawidd6/action-download-artifact@e7466d1a7587ed14867642c2ca74b5bcc1e19a2d
+        with:
+          branch: main
+          name_is_regexp: true
+          name: 'unit-.*-test-results'
+          if_no_artifact_found: true
       - name: run unit tests
         run: ./gradlew -Dorg.gradle.parallel=true -Dorg.gradle.caching=true test
       - name: Upload Unit Test Results
