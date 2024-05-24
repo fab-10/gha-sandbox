@@ -30,6 +30,8 @@ jobs:
           name: 'unit-.*-test-results'
           path: tmp
           if_no_artifact_found: true
+      - name: List files pre
+        run: ls -lR
       - name: run unit tests
         run: ./gradlew -Dorg.gradle.parallel=true -Dorg.gradle.caching=true test
       - name: Upload Unit Test Results
@@ -37,3 +39,5 @@ jobs:
         with:
           name: unit-1-test-results
           path: 'build/**/test-results/**/TEST-*.xml'
+      - name: List files post
+        run: ls -lR
