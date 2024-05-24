@@ -21,6 +21,7 @@ public class MainTest {
     Assertions.assertEquals(0, 0);
   }
 
+  @Test
   public void test4() {
     Assertions.assertEquals(1, 1);
   }
