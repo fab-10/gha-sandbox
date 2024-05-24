@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  workflow_call:
+    secrets:
+      TOP_SECRET:
+        required: true
 
 
 jobs:
