@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  unitTests:
+  syncTestReports:
     runs-on: ubuntu-22.04
     steps:
       - name: Get Unit Test Reports
