@@ -9,4 +9,10 @@ public class MainTest {
   public void test() {
     Assertions.assertTrue(true);
   }
+
+  @Test
+  public void test2() {
+    Assertions.assertFalse(false);
+  }
+
 }
