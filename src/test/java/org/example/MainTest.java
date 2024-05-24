@@ -15,4 +15,9 @@ public class MainTest {
     Assertions.assertFalse(false);
   }
 
+
+  @Test
+  public void test3() {
+    Assertions.assertEquals(0, 0);
+  }
 }
