@@ -44,7 +44,7 @@ jobs:
         with:
           workflow_conclusion: success
           workflow: test.yml
-          pr: ${{ LATEST_MERGED_PR_NUMBER }}
+          pr: ${{ env.LATEST_MERGED_PR_NUMBER }}
           name_is_regexp: true
           name: 'unit-\d+-test-results'
           path: unit-test-results
