@@ -36,7 +36,7 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - name: Get latest merge PR number
         id: latest_merged_pr_number
-        run: echo "::set-output name=pull_request_number::$(gh pr list --base main --state merged --limit 1 --json number | jq '.[].number')"
+        run: echo "::set-output name=pull_request_number::$(gh pr list --repo Consensys/gha-sandbox --base main --state merged --limit 1 --json number | jq '.[].number')"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Unit Test Reports
