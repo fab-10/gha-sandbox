@@ -36,7 +36,7 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - name: Get latest merge PR number
         id: latest_merged_pr_number
-        run: echo "::set-output name=pull_request_number::$(gh pr list --repo Consensys/gha-sandbox --base main --state merged --limit 1 --json number | jq '.[].number')"
+        run: echo "PULL_REQUEST_NUMBER=$(gh pr list --repo Consensys/gha-sandbox --base main --state merged --limit 1 --json number | jq '.[].number')" > "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Unit Test Reports
@@ -44,11 +44,13 @@ jobs:
         with:
           workflow_conclusion: success
           workflow: test.yml
-          pr: ${{ steps.latest_merged_pr_number.outputs.pull_request_number }}
+          pr: $LATEST_MERGED_PR_NUMBER
           name_is_regexp: true
           name: 'unit-\d+-test-results'
           path: unit-test-results
           if_no_artifact_found: true
+        env:
+          LATEST_MERGED_PR_NUMBER: ${{ steps.latest_merged_pr_number.outputs.PULL_REQUEST_NUMBER }}
       - name: List files pre
         run: ls -lR
       - name: Upload Unit Test Results
