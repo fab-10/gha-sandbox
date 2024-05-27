@@ -34,12 +34,17 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      - name: Get latest merge PR number
+        id: latest_merged_pr_number
+        run: echo "::set-output name=pull_request_number::$(gh pr list --base main --state merged --limit 1 --json number | jq '.[].number')"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Unit Test Reports
         uses: dawidd6/action-download-artifact@e7466d1a7587ed14867642c2ca74b5bcc1e19a2d
         with:
           workflow_conclusion: success
           workflow: test.yml
-          branch: main
+          pr: ${{ steps.latest_merged_pr_number.outputs.pull_request_number }}
           name_is_regexp: true
           name: 'unit-\d+-test-results'
           path: unit-test-results
