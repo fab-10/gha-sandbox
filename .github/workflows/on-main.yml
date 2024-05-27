@@ -13,7 +13,6 @@ jobs:
       - name: Get Unit Test Reports
         uses: dawidd6/action-download-artifact@e7466d1a7587ed14867642c2ca74b5bcc1e19a2d
         with:
-          workflow: test.yml
           workflow_conclusion: success
           pr: ${{github.event.pull_request.number}}
           name_is_regexp: true
